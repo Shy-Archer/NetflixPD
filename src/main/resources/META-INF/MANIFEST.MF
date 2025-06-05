@@ -1,3 +1,5 @@
 Manifest-Version: 1.0
-Main-Class: consumer.StandardOutputConsumer
+Main-Class: consumer.JdbcConsumer
+Class-Path: kafka-clients-3.1.0.jar zstd-jni-1.5.0-4.jar lz4-java-1.8.0.
+ jar snappy-java-1.1.8.4.jar slf4j-api-1.7.30.jar
 
