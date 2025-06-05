@@ -1,3 +1,4 @@
+  GNU nano 5.4                                          env.sh                                                    
 export BUCKET_NAME="bigdata-24-lw"
 export CLUSTER_NAME=$(/usr/share/google/get_metadata_value attributes/dataproc-cluster-name)
 export HADOOP_CONF_DIR=/etc/hadoop/conf
@@ -12,7 +13,7 @@ export KAFKA_BROKER="${CLUSTER_NAME}-w-0:9092"
 export KAFKA_CONSUMER_GROUP="netflix-ratings-group"
 
 export POSTGRES_JDBC_URL="jdbc:postgresql://localhost:8432/netflix_ratings"
-export POSTGRES_USER="streamuser"
+export POSTGRES_USER="postgres"
 export POSTGRES_PASSWORD="mysecretpassword"
 export POSTGRES_DB_NAME="netflix_ratings"
 export PGPASSWORD="mysecretpassword"
