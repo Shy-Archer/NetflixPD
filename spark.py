@@ -96,12 +96,12 @@ def anomalies(ratings_df, movies_df, window_days, min_cnt, min_avg, kafka_bootst
 
 
 if __name__ == "__main__":
-    if len(sys.argv) != 14:
+    if len(sys.argv) != 13:
         sys.exit(
             "Usage: script.py <input_file_path> <kafka_bootstrap_servers> <kafka_topic> <group_id> "
             "<jdbc_url> <jdbc_user> <jdbc_password> <sliding_window_size_days> "
             "<anomaly_rating_count_threshold> <anomaly_rating_mean_threshold> "
-            "<kafka_anomaly_topic> <processing_mode> <delay_mode>"
+            "<kafka_anomaly_topic> <delay_mode>"
         )
 
     (
@@ -134,9 +134,7 @@ if __name__ == "__main__":
         .load()
     )
 
-    ########################################################
-    # 2️⃣  Parsowanie CSV                                  #
-    ########################################################
+
     raw_values = raw_kafka_df.selectExpr("CAST(value AS STRING) AS csv")
     parts = split(col("csv"), ",")
 
@@ -149,16 +147,11 @@ if __name__ == "__main__":
         .drop("csv")
     )
 
-    ########################################################
-    # 3️⃣  Dane statyczne (movie_titles.csv)               #
-    ########################################################
+
     movies_df = (
         spark.read.option("header", False).csv(input_file_path)
     )
 
-    ########################################################
-    # 4️⃣  Uruchamianie strumieni                          #
-    ########################################################
     streams = []
 
    

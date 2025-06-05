@@ -1,5 +1,3 @@
-source ./env.sh
-
 mkdir "$INPUT_DIRECTORY_PATH"
 echo "Input data directory created successfully."
 
@@ -7,6 +5,7 @@ echo "Input data directory created successfully."
 echo "Copying input files from GCS..."
 hadoop fs -copyToLocal gs://"${BUCKET_NAME}"/Netflix/netflix-prize-data/*.csv "$INPUT_DIRECTORY_PATH"
 echo "Input files copied successfully."
+
 
 # Tworzenie tematów Kafka
 echo "Creating Kafka topics..."
@@ -27,7 +26,7 @@ do
   /usr/lib/kafka/bin/kafka-topics.sh --bootstrap-server ${CLUSTER_NAME}-w-0:9092 --create --topic "$i" --partitions 1 --replication-factor 1
   echo "Created new topic: $i"
 done
-
+wget https://jdbc.postgresql.org/download/postgresql-42.6.0.jar
 echo "Currently existing topics: "
 /usr/lib/kafka/bin/kafka-topics.sh --bootstrap-server ${CLUSTER_NAME}-w-0:9092 --listecho "Kafka topics created successfully."
 
@@ -38,7 +37,6 @@ docker run --name postgresdb -p 8432:5432 -e POSTGRES_PASSWORD=mysecretpassword 
 echo "Waiting for PostgreSQL container to start..."
 sleep 10
 echo "PostgreSQL container started successfully."
-
 # Wykonanie skryptu SQL
 echo "Executing SQL setup script..."
 psql -h localhost -p 8432 -U postgres -v user="$POSTGRES_USER" -v password="$POSTGRES_PASSWORD" -v db_name="$POSTGRES_DB_NAME" -f setup.sql
