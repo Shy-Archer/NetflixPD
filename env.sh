@@ -8,7 +8,7 @@ export INPUT_FILE_PATH="gs://${BUCKET_NAME}/Netflix/movie_titles.csv"
 export KAFKA_PRODUCER_SLEEP_SEC=30
 export KAFKA_TOPIC_DATA="netflix-ratings"
 export KAFKA_TOPIC_ANOMALIES="netflix-ratings-anomalies"
-export KAFKA_BROKER="${DATAPROC_CLUSTER_NAME}-w-0:9092"
+export KAFKA_BROKER="${CLUSTER_NAME}-w-0:9092"
 export KAFKA_CONSUMER_GROUP="netflix-ratings-group"
 
 export POSTGRES_JDBC_URL="jdbc:postgresql://localhost:8432/netflix_ratings"
