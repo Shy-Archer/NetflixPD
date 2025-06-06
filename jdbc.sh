@@ -1,7 +1,7 @@
 source ./env.sh
 
 # Ścieżka do JAR-a aplikacji (bez spacji!)
-APP_JAR="out/artifacts/JdbcConsumer/JdbcConsumer.jar"
+APP_JAR="out/artifacts/JDBCConsumer/JDBCConsumer.jar"
 
 # Ścieżka do sterownika PostgreSQL (upewnij się, że plik istnieje w tym katalogu)
 PG_JAR="postgresql-42.6.0.jar"
