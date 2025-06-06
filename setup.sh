@@ -29,16 +29,16 @@ do
 done
 wget https://jdbc.postgresql.org/download/postgresql-42.6.0.jar
 echo "Currently existing topics: "
-/usr/lib/kafka/bin/kafka-topics.sh --bootstrap-server ${CLUSTER_NAME}-w-0:9092 --listecho "Kafka topics created successfully."
+/usr/lib/kafka/bin/kafka-topics.sh --bootstrap-server ${CLUSTER_NAME}-w-0:9092 --list
 
 # Uruchomienie kontenera Docker z bazą danych PostgreSQL
 echo "Starting PostgreSQL container..."
 docker run --name postgresdb -p 8432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres
-# Opóźnienie przed wykonaniem skryptu SQL
+# Opóźnienie przed wykonaniem skryptu 
 echo "Waiting for PostgreSQL container to start..."
 sleep 10
 echo "PostgreSQL container started successfully."
 # Wykonanie skryptu SQL
 echo "Executing SQL setup script..."
-psql -h localhost -p 8432 -U postgres -v user="$POSTGRES_USER" -v password="$POSTGRES_PASSWORD" -v name="$POSTGRES_DB_NAME" -f setup.sql
+PGPASSWORD=$POSTGRES_PASSWORD psql -h localhost -p 8432 -U $POSTGRES_USER -v user="$POSTGRES_USER" -v password="$POSTGRES_PASSWORD" -v name="$POSTGRES_DB_NAME" -f setup.sql
 echo "SQL setup script executed successfully."
