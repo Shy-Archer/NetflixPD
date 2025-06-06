@@ -40,5 +40,5 @@ sleep 10
 echo "PostgreSQL container started successfully."
 # Wykonanie skryptu SQL
 echo "Executing SQL setup script..."
-psql -h localhost -p 8432 -U postgres -v user="$POSTGRES_USER" -v password="$POSTGRES_PASSWORD" -v db_name="$POSTGRES_DB_NAME" -f setup.sql
+psql -h localhost -p 8432 -U postgres -v user="$POSTGRES_USER" -v password="$POSTGRES_PASSWORD" -v name="$POSTGRES_DB_NAME" -f setup.sql
 echo "SQL setup script executed successfully."
