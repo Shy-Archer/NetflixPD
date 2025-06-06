@@ -1,4 +1,3 @@
-  GNU nano 5.4                                                                            NetflixProducer.sh                                                                                      
 #!/usr/bin/env bash
 source ./env.sh
 

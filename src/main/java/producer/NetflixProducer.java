@@ -61,18 +61,18 @@ public class NetflixProducer {
             String path = directory + File.separator + filename;
             try {
                 System.out.println("Processing file: " + path);
-                // Odczytaj linia po linii, pomijając pierwszy wiersz (header)
+               
                 try (Stream<String> lines = Files.lines(Paths.get(path))) {
                     lines.skip(1).forEach(line -> {
                         String[] parts = line.split(",");
                         if (parts.length > 0) {
                             String key = parts[0];
-                            // Wysłanie rekordu do Kafki
+                           
                             producer.send(new ProducerRecord<>(topicName, key, line));
                         }
                     });
                 }
-                // Poczekaj określoną liczbę sekund
+               
                 long sleepTimeSec = Long.parseLong(sleepTimeStr);
                 TimeUnit.SECONDS.sleep(sleepTimeSec);
             } catch (IOException | InterruptedException e) {

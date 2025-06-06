@@ -25,10 +25,11 @@ def real_time_processing(ratings_df, movies_df, jdbc_url, jdbc_user, jdbc_passwo
     else:
         raise ValueError("delay_mode must be 'A' or 'C'")
 
-    # Agregacja miesięczna
+    
     monthly_df = (
         ratings_df.withWatermark("ts", watermark_delay)
-        .groupBy(window(col("ts"), "1 month"), col("movie_id"))
+        .groupBy(window(col("ts"), "30 days", "30 days"), col("movie_id"))
+
         .agg(
             count("*").alias("rating_count"),
             sum("rating").alias("rating_sum"),
@@ -100,7 +101,7 @@ if __name__ == "__main__":
         sys.exit(
             "Usage: script.py <input_file_path> <kafka_bootstrap_servers> <kafka_topic> <group_id> "
             "<jdbc_url> <jdbc_user> <jdbc_password> <sliding_window_size_days> "
-            "<anomaly_rating_count_threshold> <anomaly_rating_mean_threshold> "
+            "<anomaly_rating_count> <anomaly_rating_mean> "
             "<kafka_anomaly_topic> <delay_mode>"
         )
 
@@ -113,8 +114,8 @@ if __name__ == "__main__":
         jdbc_user,
         jdbc_password,
         sliding_window_size_days,
-        anomaly_rating_count_threshold,
-        anomaly_rating_mean_threshold,
+        anomaly_rating_count,
+        anomaly_rating_mean,
         kafka_anomaly_topic,
         delay_mode,
     ) = sys.argv[1:13]
@@ -124,6 +125,7 @@ if __name__ == "__main__":
 
     
     host_name = socket.gethostname()
+    print(host_name)
     raw_kafka_df = (
         spark.readStream.format("kafka")
         .option("kafka.bootstrap.servers", kafka_bootstrap_servers)
@@ -153,7 +155,7 @@ if __name__ == "__main__":
     )
 
     streams = []
-
+    jdbc_url = f"jdbc:postgresql://{host_name}:8432/netflix_ratings"
    
     streams.append(
         real_time_processing(
@@ -172,8 +174,8 @@ if __name__ == "__main__":
             ratings_df,
             movies_df,
             int(sliding_window_size_days),
-            int(anomaly_rating_count_threshold),
-            float(anomaly_rating_mean_threshold),
+            int(anomaly_rating_count),
+            float(anomaly_rating_mean),
             kafka_bootstrap_servers,
             kafka_anomaly_topic,
          )

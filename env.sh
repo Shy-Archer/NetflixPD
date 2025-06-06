@@ -1,4 +1,3 @@
-  GNU nano 5.4                                          env.sh                                                    
 export BUCKET_NAME="bigdata-24-lw"
 export CLUSTER_NAME=$(/usr/share/google/get_metadata_value attributes/dataproc-cluster-name)
 export HADOOP_CONF_DIR=/etc/hadoop/conf

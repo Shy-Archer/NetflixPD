@@ -1,3 +1,4 @@
+source ./env.sh
 mkdir "$INPUT_DIRECTORY_PATH"
 echo "Input data directory created successfully."
 

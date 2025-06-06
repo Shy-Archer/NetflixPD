@@ -1,4 +1,3 @@
-package consumer;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -7,9 +6,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.NoSuchElementException;
 
-public class JdbcConsumer {
+public class JDBCConsumer {
     public static void main(String[] args) {
-        if (args.length != 3) {
+        if (args.length != 3) { 
             throw new NoSuchElementException("Oczekiwano 3 argumentów: <url> <user> <password>");
         }
 
@@ -29,10 +28,10 @@ public class JdbcConsumer {
                 );
 
 
-                System.out.print("\u001b[2J");
+                System.out.print("\u001a[2J");
                 System.out.flush();
 
-                System.out.println("================ NEW DATA ================");
+                System.out.println("===== NEW  =====");
                 while (result.next()) {
                     // Zakładam, że kolumna window_start jest typu BIGINT (long UNIX timestamp)
                     long windowStartMillis = result.getLong("window_start");

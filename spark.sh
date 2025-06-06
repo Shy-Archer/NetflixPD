@@ -1,5 +1,3 @@
-  GNU nano 5.4                                                                                 spark.sh                                                                                           
-
 source ./env.sh
 
 
@@ -7,7 +5,7 @@ source ./env.sh
 KAFKA_PACKAGE="org.apache.spark:spark-sql-kafka-0-10_2.12:3.3.0"
 POSTGRES_PACKAGE="org.postgresql:postgresql:42.6.0"
 
-spark-submit \
+$SPARK_HOME/bin/spark-submit \
   --packages "$KAFKA_PACKAGE","$POSTGRES_PACKAGE" \
   spark.py \
     "$INPUT_FILE_PATH" \
@@ -22,5 +20,3 @@ spark-submit \
     "$ANOMALY_RATING_MEAN" \
     "$KAFKA_TOPIC_ANOMALIES" \
     "$DELAY_TYPE"
-
-
