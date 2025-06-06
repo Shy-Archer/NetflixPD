@@ -13,11 +13,11 @@ DROP TABLE IF EXISTS movie_ratings;
 CREATE TABLE IF NOT EXISTS movie_ratings (
      window_start BIGINT NOT NULL,
      movie_id VARCHAR(32) NOT NULL,
-     PRIMARY KEY (window_start, movie_id),
      title VARCHAR(128) NOT NULL,
      rating_count INTEGER NOT NULL,
      rating_sum INTEGER NOT NULL,
-     unique_rating_count INTEGER NOT NULL
+     unique_rating_count INTEGER NOT NULL,
+     PRIMARY KEY (window_start, movie_id)
      
 );
 GRANT ALL PRIVILEGES ON TABLE movie_ratings TO :"user";
