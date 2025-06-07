@@ -1,3 +1,4 @@
+source ./env.sh
 docker stop postgresdb
 docker rm postgresdb
 
