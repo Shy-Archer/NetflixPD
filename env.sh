@@ -14,7 +14,7 @@ export KAFKA_CONSUMER_GROUP="netflix-ratings-group"
 
 
 export POSTGRES_JDBC_URL="jdbc:postgresql://localhost:8432/netflix_ratings"
-export POSTGRES_USER="postgres"
+export POSTGRES_USER="sparkuser"
 export POSTGRES_PASSWORD="mysecretpassword"
 export POSTGRES_DB_NAME="netflix_ratings"
 
