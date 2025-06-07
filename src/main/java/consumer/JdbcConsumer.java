@@ -28,7 +28,7 @@ public class JDBCConsumer {
                 );
 
 
-                System.out.print("\u001a[2J");
+                System.out.print("\u001a");
                 System.out.flush();
 
                 System.out.println("===== NEW  =====");
