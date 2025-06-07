@@ -33,12 +33,12 @@ echo "Currently existing topics: "
 
 # Uruchomienie kontenera Docker z bazą danych PostgreSQL
 echo "Starting PostgreSQL container..."
-docker run --name postgresdb -p 8432:5432 -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD -d $POSTGRES_USER
+docker run --name postgresdb -p 8432:5432 -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD -d postgres
 # Opóźnienie przed wykonaniem skryptu 
 echo "Waiting for PostgreSQL container to start..."
 sleep 10
 echo "PostgreSQL container started successfully."
 # Wykonanie skryptu SQL
 echo "Executing SQL setup script..."
-PGPASSWORD=$POSTGRES_PASSWORD psql -h localhost -p 8432 -U $POSTGRES_USER -v user="$POSTGRES_USER" -v password="$POSTGRES_PASSWORD" -v name="$POSTGRES_DB_NAME" -f setup.sql
+PGPASSWORD=$POSTGRES_PASSWORD psql -h localhost -p 8432 -U postgres -v user="$POSTGRES_USER" -v password="$POSTGRES_PASSWORD" -v name="$POSTGRES_DB_NAME" -f setup.sql
 echo "SQL setup script executed successfully."
