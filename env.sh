@@ -22,4 +22,4 @@ export POSTGRES_DB_NAME="netflix_ratings"
 export ANOMALY_PERIOD_LENGTH=1
 export ANOMALY_RATING_COUNT=2
 export ANOMALY_RATING_MEAN=2
-export DELAY_TYPE="A"
+export DELAY_TYPE="C"
