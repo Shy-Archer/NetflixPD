@@ -33,7 +33,7 @@ echo "Currently existing topics: "
 
 # Uruchomienie kontenera Docker z bazą danych PostgreSQL
 echo "Starting PostgreSQL container..."
-docker run --name postgresdb -p 8432:5432 -e POSTGRES_PASSWORD=mysecretpassword -d postgres
+docker run --name postgresdb -p 8432:5432 -e POSTGRES_PASSWORD=$POSTGRES_PASSWORD -d $POSTGRES_USER
 # Opóźnienie przed wykonaniem skryptu 
 echo "Waiting for PostgreSQL container to start..."
 sleep 10
